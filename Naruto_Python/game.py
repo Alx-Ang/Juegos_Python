@@ -61,12 +61,14 @@ class Barravidagoku(Sprite):
 	def update(self):
 		if barravidagoku.rect.x <= -152:
 			personaje.muerto = 1
+			ese_compa.play()
 		if disparo.rect.y >= (personaje.rect.y - 56):
 			if disparo.rect.y <= (personaje.rect.y + 62):
 				if disparo.rect.x >= personaje.rect.x:
 					if disparo.rect.x <= (personaje.rect.x + 43):
 						barravidagoku.rect.x -= 26
 						disparo.rect.x = -400
+						hay.play()
 		if minicell.rect.y >= (personaje.rect.y - 56):
 			if minicell.rect.y <= (personaje.rect.y + 62):
 				if minicell.rect.x >= personaje.rect.x:
@@ -122,23 +124,31 @@ class Barravidaminicell(Sprite):
 	def update(self):
 		if self.rect.x >= 782:
 			minicell.muerto = 1
+			siu.play()
 		if kamehameha.rect.y >= minicell.rect.y:
 			if kamehameha.rect.y <= (minicell.rect.y + 62):
 				if kamehameha.rect.x >= minicell.rect.x:
 					if kamehameha.rect.x <= (minicell.rect.x + 43):
 						self.rect.x += 6
 						kamehameha.rect.x = 900
+						ayuda.play()
 
 if __name__ == '__main__':
 	# Variables.
 	salir = False
 
 	# Variables Sonidos.
-	pygame.mixer.music.load("Imagenes/naruto.ogg")
+	pygame.mixer.music.load("Sonidos/naruto.ogg")
 	pygame.mixer.music.set_volume(0.4)
 	
-	disparo1 = pygame.mixer.Sound("Imagenes/disparo_n.ogg")
-	disparo2 = pygame.mixer.Sound("Imagenes/disparo_s.ogg")
+	disparo1 = pygame.mixer.Sound("Sonidos/disparo_n.ogg")
+	disparo2 = pygame.mixer.Sound("Sonidos/disparo_s.ogg")
+
+	hay = pygame.mixer.Sound("Sonidos/hay.ogg")
+	ayuda = pygame.mixer.Sound("Sonidos/ayuda.ogg")
+
+	ese_compa = pygame.mixer.Sound("Sonidos/ese_compa.ogg")
+	siu = pygame.mixer.Sound("Sonidos/siu.ogg")
 
 	# Establezco la pantalla.
 	screen = pygame.display.set_mode((800,485))
@@ -191,7 +201,7 @@ if __name__ == '__main__':
 		if personaje.muerto == 1:
 			screen.blit(hasperdido, (350,195))
 		if minicell.muerto == 1:
-			screen.blit(hasganado, (250,264))
+			screen.blit(hasganado, (350,195))
 		pygame.display.flip()
 
 		if personaje.muerto == 1:
